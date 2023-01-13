@@ -10,9 +10,7 @@ public class TestStreams {
 
     public static void main(String[] args) {
 
-        IfDishSearcher dishSearcher = BaseSearcherLocator.lookup(IfDishSearcher.class);//lookup(DishSearcher.class);
-
-        System.out.println(DishSearcher.class);
+        IfDishSearcher dishSearcher = BaseSearcherLocator.lookup(IfDishSearcher.class);
 
         List<String> healthyDishNames = dishSearcher.searchHealthyDishNames();
         System.out.println(healthyDishNames);

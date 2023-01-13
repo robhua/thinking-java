@@ -30,13 +30,8 @@ public class BaseSearcherLocator extends AbstractSearcherLocator {
      * @return The List of class name in config file.
      */
     protected static List<String> loadBasePropertyNameList() {
-
         List<String> _nameList = new ArrayList<String>();
-//        String _propertyName = System.getProperty(SYSTEM_PROPERTY_CONFIG_FILE);
-//        if (null == _propertyName) {
-//            _propertyName = DEFAULT_PROPERTY_FILE;
-//        }
-//        _nameList.add(_propertyName);
+        //TODO Load base property name list
         return _nameList;
     }
 }

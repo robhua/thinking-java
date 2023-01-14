@@ -1,3 +1,5 @@
+package main.java;
+
 import com.tmp.base.biz.service.IfDishSearcher;
 import com.tmp.base.searcher.BaseSearcherLocator;
 import com.tmp.base.biz.service.impl.DishSearcher;

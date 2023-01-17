@@ -1,14 +1,11 @@
-package main.java;
-
 import com.tmp.base.biz.service.IfDishSearcher;
 import com.tmp.base.searcher.BaseSearcherLocator;
-import com.tmp.base.biz.service.impl.DishSearcher;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestStreams {
-    private static final int HEALTHY_CALORIE = 400;
-    private static final int HIGH_CALORIE = 300;
 
     public static void main(String[] args) {
 
@@ -20,5 +17,20 @@ public class TestStreams {
         int maxSize = 3;
         List<String> highCalorieDishNames = dishSearcher.searchHighCalorieDishNames(maxSize);
         System.out.println(highCalorieDishNames);
+
+        List<Integer> dishNameLengths = dishSearcher.searchDishNameLengths();
+        System.out.println(dishNameLengths);
+
+        long numberOfDish = dishSearcher.numberDishs();
+        System.out.println(numberOfDish);
+
+        List<String> words = Arrays.asList("Hello", "world");
+        List<String> collect = words.stream()
+                                        .map(word -> word.split(""))
+                                        .flatMap(Arrays::stream)
+                                        .distinct()
+                                        .collect(Collectors.toList());
+        System.out.println(collect);
+
     }
 }

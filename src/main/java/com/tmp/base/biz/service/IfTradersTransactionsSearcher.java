@@ -20,4 +20,6 @@ public interface IfTradersTransactionsSearcher {
     void printTransactionValueFromTraderCity(String city);
 
     Optional<Integer> highestValueAllTransaction();
+
+    Optional<Transaction> findSmallestTransactionByValue();
 }

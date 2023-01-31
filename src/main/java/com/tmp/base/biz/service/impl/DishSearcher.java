@@ -6,6 +6,7 @@ import com.tmp.base.domain.Dish;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalInt;
 
 import static java.util.stream.Collectors.toList;
 
@@ -40,6 +41,13 @@ public class DishSearcher implements IfDishSearcher {
     @Override
     public long numberDishs() {
         return menu.stream().count();
+    }
+
+    @Override
+    public OptionalInt findMaxCalories() {
+        return menu.stream()
+                    .mapToInt(Dish::getCalories)
+                    .max();
     }
 
     private static List<Dish> createMenu() {

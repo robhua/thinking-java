@@ -86,4 +86,11 @@ public class TradersTransactionsSearcher implements IfTradersTransactionsSearche
                             .map(Transaction::getValue)
                             .reduce(Integer::max);
     }
+
+    @Override
+    public Optional<Transaction> findSmallestTransactionByValue() {
+        return transactions.stream()
+//                            .min(Comparator.comparing(Transaction::getValue));
+                            .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2);
+    }
 }

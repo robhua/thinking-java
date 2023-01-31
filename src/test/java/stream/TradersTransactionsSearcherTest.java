@@ -82,4 +82,14 @@ public class TradersTransactionsSearcherTest {
         //TODO Testing the Value of an Optional  Using AssertJ
     }
 
+    @Test
+    public void tesTransactionSmallestValue() {
+        IfTradersTransactionsSearcher transactionsSearcher = BaseSearcherLocator.lookup(IfTradersTransactionsSearcher.class);
+
+        Optional<Transaction> smallestTransaction = transactionsSearcher.findSmallestTransactionByValue();
+
+        assertTrue(smallestTransaction.isPresent());
+        assertEquals(300, smallestTransaction.get().getValue());
+    }
+
 }

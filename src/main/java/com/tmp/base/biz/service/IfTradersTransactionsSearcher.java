@@ -4,6 +4,7 @@ import com.tmp.base.domain.Trader;
 import com.tmp.base.domain.Transaction;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IfTradersTransactionsSearcher {
     List<Transaction> findTransactionsAndSortByValue(int year);
@@ -17,4 +18,6 @@ public interface IfTradersTransactionsSearcher {
     boolean isTraderBasedCity(String city);
 
     void printTransactionValueFromTraderCity(String city);
+
+    Optional<Integer> highestValueAllTransaction();
 }

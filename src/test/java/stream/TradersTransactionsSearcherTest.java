@@ -8,8 +8,10 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TradersTransactionsSearcherTest {
     @Test
@@ -68,6 +70,16 @@ public class TradersTransactionsSearcherTest {
         String city = "Milan";
         transactionsSearcher.printTransactionValueFromTraderCity(city);
     }
+    @Test
+    public void tesHighestValueAllTransaction() {
+        IfTradersTransactionsSearcher transactionsSearcher = BaseSearcherLocator.lookup(IfTradersTransactionsSearcher.class);
 
+        Optional<Integer> highestValue = transactionsSearcher.highestValueAllTransaction();
+        assertTrue(highestValue.isPresent());
+
+        Optional<Integer> expectedHighestValue = Optional.of(1000);
+        assertEquals(expectedHighestValue, highestValue);
+        //TODO Testing the Value of an Optional  Using AssertJ
+    }
 
 }

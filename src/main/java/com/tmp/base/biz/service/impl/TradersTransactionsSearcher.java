@@ -7,6 +7,7 @@ import com.tmp.base.domain.Transaction;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TradersTransactionsSearcher implements IfTradersTransactionsSearcher {
@@ -77,5 +78,12 @@ public class TradersTransactionsSearcher implements IfTradersTransactionsSearche
                     .filter(t -> city.equals(t.getTrader().getCity()))
                     .map(Transaction::getValue)
                     .forEach(System.out::println);
+    }
+
+    @Override
+    public Optional<Integer> highestValueAllTransaction() {
+        return transactions.stream()
+                            .map(Transaction::getValue)
+                            .reduce(Integer::max);
     }
 }

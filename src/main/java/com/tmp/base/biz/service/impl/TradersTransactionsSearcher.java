@@ -70,4 +70,12 @@ public class TradersTransactionsSearcher implements IfTradersTransactionsSearche
                                                                 .getCity()
                                                                 .equals(city));
     }
+
+    @Override
+    public void printTransactionValueFromTraderCity(String city) {
+        transactions.stream()
+                    .filter(t -> city.equals(t.getTrader().getCity()))
+                    .map(Transaction::getValue)
+                    .forEach(System.out::println);
+    }
 }

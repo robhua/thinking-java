@@ -15,4 +15,6 @@ public interface IfTradersTransactionsSearcher {
     String findAllTraderNameSortedByName();
 
     boolean isTraderBasedCity(String city);
+
+    void printTransactionValueFromTraderCity(String city);
 }

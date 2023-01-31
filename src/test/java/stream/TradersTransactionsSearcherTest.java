@@ -60,6 +60,13 @@ public class TradersTransactionsSearcherTest {
         boolean _milanBased = transactionsSearcher.isTraderBasedCity(city);
         assertEquals(true, _milanBased);
     }
+
+    @Test
+    public void tesPrintTransactionValueFromTraderCity() {
+        IfTradersTransactionsSearcher transactionsSearcher = BaseSearcherLocator.lookup(IfTradersTransactionsSearcher.class);
+
+        String city = "Milan";
+        transactionsSearcher.printTransactionValueFromTraderCity(city);
     }
 
 

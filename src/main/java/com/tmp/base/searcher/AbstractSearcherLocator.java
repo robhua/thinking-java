@@ -59,9 +59,13 @@ public abstract class AbstractSearcherLocator {
      */
     private static String findClassName(String interfaceClassName, List bundleList) {
         //TODO findClassName from bundle list
-        String _className = "com.tmp.base.biz.service.impl.DishSearcher";
-
-
-        return _className;
+        String _dish = "com.tmp.base.biz.service.impl.DishSearcher";
+        String _transaction = "com.tmp.base.biz.service.impl.TradersTransactionsSearcher";
+        if (interfaceClassName.contains("DishSearcher")) {
+            return _dish;
+        } else if (interfaceClassName.contains("com.tmp.base.biz.service.IfTradersTransactionsSearcher")) {
+            return _transaction;
+        }
+        return _dish;
     }
 }

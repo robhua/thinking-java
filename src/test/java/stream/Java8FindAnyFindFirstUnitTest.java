@@ -1,15 +1,17 @@
 package stream;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Java8FindAnyFindFirstUnitTest {
     @Test
@@ -19,7 +21,6 @@ public class Java8FindAnyFindFirstUnitTest {
 
         Optional<String> result = list.stream().findAny();
 
-        assertTrue(result.isPresent());
         assertThat(result.get(), anyOf(is("A"), is("B"), is("C"), is("D")));
     }
 
@@ -34,7 +35,8 @@ public class Java8FindAnyFindFirstUnitTest {
                                 .filter(x -> x%3 == 0)
                                 .findFirst();
 
-        assertTrue(firstSquareDivisibleByThree.isPresent() && firstSquareDivisibleByThree.get().intValue() == 9);
+        assertTrue(firstSquareDivisibleByThree.isPresent());
+        assertEquals(9, firstSquareDivisibleByThree.get().intValue());
 
     }
 

@@ -4,14 +4,15 @@ import com.tmp.base.biz.service.IfTradersTransactionsSearcher;
 import com.tmp.base.domain.Trader;
 import com.tmp.base.domain.Transaction;
 import com.tmp.base.searcher.BaseSearcherLocator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class TradersTransactionsSearcherTest {
     @Test
@@ -60,7 +61,7 @@ public class TradersTransactionsSearcherTest {
 
         String city = "Milan";
         boolean _milanBased = transactionsSearcher.isTraderBasedCity(city);
-        assertEquals(true, _milanBased);
+        assertTrue(_milanBased);
     }
 
     @Test

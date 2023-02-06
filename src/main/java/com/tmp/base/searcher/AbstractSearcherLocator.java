@@ -1,7 +1,11 @@
 package com.tmp.base.searcher;
 
+import com.tmp.base.common.exceptions.ApplicationLogicException;
+import com.tmp.base.mid.java.constants.SystemErrorCodeConstants;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -22,13 +26,20 @@ public abstract class AbstractSearcherLocator {
      */
     protected static <T> T lookup(Class<T> interfaceClass, List bundleList) {
         String _interfaceClassName = interfaceClass.getName();
-        String _searcherClassName = findClassName(_interfaceClassName, bundleList);
+
+        String _searcherClassName = null;
+        try {
+            _searcherClassName = findClassName(_interfaceClassName, bundleList);
+        } catch (MissingResourceException e) {
+            IllegalStateException _baseException = new IllegalStateException("searcher for " + _interfaceClassName + " is not defined.");
+            throw new ApplicationLogicException(SystemErrorCodeConstants.ERROR_LOGIC, _baseException);
+        }
 
         try {
             T _searcher = (T) Class.forName(_searcherClassName).newInstance();
             return _searcher;
         } catch (Exception e) {
-            throw new RuntimeException("E00008", e);
+            throw new ApplicationLogicException(SystemErrorCodeConstants.ERROR_LOGIC, e);
         }
     }
 
@@ -58,14 +69,23 @@ public abstract class AbstractSearcherLocator {
      * @return
      */
     private static String findClassName(String interfaceClassName, List bundleList) {
-        //TODO findClassName from bundle list
-        String _dish = "com.tmp.base.biz.service.impl.DishSearcher";
-        String _transaction = "com.tmp.base.biz.service.impl.TradersTransactionsSearcher";
-        if (interfaceClassName.contains("DishSearcher")) {
-            return _dish;
-        } else if (interfaceClassName.contains("com.tmp.base.biz.service.IfTradersTransactionsSearcher")) {
-            return _transaction;
+        String _className = null;
+        MissingResourceException _e = null;
+
+        // loop for list of ResourceBundle
+        for (int i = 0; i < bundleList.size(); i++) {
+            try {
+                ResourceBundle _bundle = (ResourceBundle) bundleList.get(i);
+                _className = (String) _bundle.getString(interfaceClassName);
+            } catch (MissingResourceException e) {
+                _e = e;
+            }
         }
-        return _dish;
+
+        // case of missing resource
+        if (_className == null) {
+            throw _e;
+        }
+        return _className;
     }
 }

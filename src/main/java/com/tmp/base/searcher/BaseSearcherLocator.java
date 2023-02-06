@@ -20,6 +20,7 @@ import java.util.List;
  *
  */
 public class BaseSearcherLocator extends AbstractSearcherLocator {
+    private static final String DEFAULT_PROPERTY_FILE = "BaseSearchers";
     private static final List<String> BUNDLE_LIST = loadBundleList(loadBasePropertyNameList());
     public static <T> T lookup(Class<T> interfaceClass) {
         T _searcher = lookup(interfaceClass, BUNDLE_LIST);
@@ -31,7 +32,8 @@ public class BaseSearcherLocator extends AbstractSearcherLocator {
      */
     protected static List<String> loadBasePropertyNameList() {
         List<String> _nameList = new ArrayList<String>();
-        //TODO Load base property name list
+        String _propertyName = DEFAULT_PROPERTY_FILE;
+        _nameList.add(_propertyName);
         return _nameList;
     }
 }

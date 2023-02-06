@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
@@ -23,6 +25,22 @@ public class Java8FindAnyFindFirstUnitTest {
 
         assertThat(result.get(), anyOf(is("A"), is("B"), is("C"), is("D")));
     }
+
+    @Test
+    public void createFlatteningStream() {
+
+        String[] arrayOfWords = {"Goodbye", "World"};
+
+        Stream<String> streamOfwords = Arrays.stream(arrayOfWords);
+
+        List<String> uniqueCharacters = streamOfwords.map(w -> w.split(""))
+                                                    .flatMap(Arrays::stream)
+                                                    .distinct()
+                                                    .collect(Collectors.toList());
+
+        System.out.println(uniqueCharacters);
+    }
+
 
     @Test
     public void createStream_whenFindFristSquareDivisibleByThree_thenCorrect() {
@@ -54,6 +72,22 @@ public class Java8FindAnyFindFirstUnitTest {
 
         assertArrayEquals(new int[]{2, 4}, pairs.get(0));
         assertArrayEquals(new int[]{3, 3}, pairs.get(1));
+    }
+
+    @Test
+    public void testNumericRanges() {
+        Stream<double[]> pythagoreanTriples = IntStream.rangeClosed(1, 100).boxed()
+                                                    .flatMap(a ->
+                                                            IntStream.rangeClosed(a, 100)
+                                                                    .mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)})
+                                                                    .filter(t -> t[2] % 1 == 0)
+                                                    );
+
+//        stream.forEach(pair -> System.out.println(pair[0] + ", " + pair[1]));
+        Stream<int[]> stream = IntStream.rangeClosed(1, 3)
+                .mapToObj(a -> new int[]{a, 1});
+//        System.out.println(pythagoreanTriples.count());
+        pythagoreanTriples.limit(5).forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2]));
     }
 
 }
